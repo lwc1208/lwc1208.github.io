@@ -2,101 +2,106 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>H5 2048</title>
+  <meta charset="utf-8">
+  <title>2048</title>
 
-    <link href="style/main.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
-    <script type="text/javascript" src="js/game.js"></script>
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
-    <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x1096.png"
-        media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone 5+ -->
-    <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x920.png"
-        media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)">
-    <!-- iPhone, retina -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link href="style/main.css" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x1096.png"
+    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone 5+ -->
+  <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x920.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)">
+  <!-- iPhone, retina -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <meta name="viewport"
-        content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport"
+    content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 
-<body align="center">
-    <h1>2048</h1>
-    <p>分数:<span id="score"></span></p>
+<body>
 
-    <audio  autoplay="autoplay" loop  id="music">
-        <source src="http://music.163.com/song/media/outer/url?id=5221167" audio="" >
-    </audio>
-    
-    <div id="gridPanel">
-        <!--背景单元格-->
-        <div id="g00" class="grid"></div>
-        <div id="g01" class="grid"></div>
-        <div id="g02" class="grid"></div>
-        <div id="g03" class="grid"></div>
+  <!-- 背景音乐 -->
+  <audio autoplay="autoplay" loop id="music">
+    <source src="http://music.163.com/song/media/outer/url?id=5221167" audio="">
+  </audio>
 
-        <div id="g10" class="grid"></div>
-        <div id="g11" class="grid"></div>
-        <div id="g12" class="grid"></div>
-        <div id="g13" class="grid"></div>
-
-        <div id="g20" class="grid"></div>
-        <div id="g21" class="grid"></div>
-        <div id="g22" class="grid"></div>
-        <div id="g23" class="grid"></div>
-
-        <div id="g30" class="grid"></div>
-        <div id="g31" class="grid"></div>
-        <div id="g32" class="grid"></div>
-        <div id="g33" class="grid"></div>
-
-        <!--前景单元格-->
-
-        <div id="c00" class="cell"></div>
-        <div id="c01" class="cell"></div>
-        <div id="c02" class="cell"></div>
-        <div id="c03" class="cell"></div>
-
-        <div id="c10" class="cell"></div>
-        <div id="c11" class="cell"></div>
-        <div id="c12" class="cell"></div>
-        <div id="c13" class="cell"></div>
-
-        <div id="c20" class="cell"></div>
-        <div id="c21" class="cell"></div>
-        <div id="c22" class="cell"></div>
-        <div id="c23" class="cell"></div>
-
-        <div id="c30" class="cell"></div>
-        <div id="c31" class="cell"></div>
-        <div id="c32" class="cell"></div>
-        <div id="c33" class="cell"></div>
-
+  <div class="container">
+    <div class="heading">
+      <h1 class="title">2048</h1>
+      <div class="scores-container">
+        <div class="score-container">0</div>
+        <div class="best-container">0</div>
+      </div>
     </div>
 
-    <!--Game Over界面-->
+    <div class="above-game">
+      <p class="game-intro">欢迎来到 <strong>2048 小游戏!</strong></p>
+      <a class="restart-button">开 始 !</a>
+    </div>
 
-    <div id="gameOver">
-
-        <div>
-            <!--灰色半透明背景-->
+    <div class="game-container">
+      <div class="game-message">
+        <p></p>
+        <div class="lower">
+          <a class="keep-playing-button">Keep going</a>
+          <a class="retry-button">再试一次</a>
         </div>
+      </div>
 
-        <!--前景小窗-->
+      <div class="grid-container">
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+      </div>
 
-        <p>Game Over!<br>
+      <div class="tile-container">
 
-            分数:<span id="finalScore"></span><br>
-
-            <a class="button" id="restart" onclick="game.start()">Try again!</a>
-
-        </p>
-
+      </div>
     </div>
+
+    <p class="game-explanation">
+      <strong class="important">How to play:</strong> 使 用 <strong>方向 键</strong> 移动磁贴. 当两个具有相同数字的图块接触时, 它们
+      <strong>合并为一个！</strong>
+    </p>
+
+    <hr>
+
+  </div>
+
+  <script src="js/bind_polyfill.js"></script>
+  <script src="js/classlist_polyfill.js"></script>
+  <script src="js/animframe_polyfill.js"></script>
+  <script src="js/keyboard_input_manager.js"></script>
+  <script src="js/html_actuator.js"></script>
+  <script src="js/grid.js"></script>
+  <script src="js/tile.js"></script>
+  <script src="js/local_storage_manager.js"></script>
+  <script src="js/game_manager.js"></script>
+  <script src="js/application.js"></script>
 </body>
 
 </html>
