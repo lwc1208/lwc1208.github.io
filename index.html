@@ -2,75 +2,101 @@
 <html>
 
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta charset="utf-8">
+    <title>H5 2048</title>
 
-    <title>数字时钟</title>
-    <link rel="stylesheet" href="./index.css">
+    <link href="style/main.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="js/game.js"></script>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
+    <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x1096.png"
+        media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone 5+ -->
+    <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x920.png"
+        media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)">
+    <!-- iPhone, retina -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport"
+        content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 
-<body>
-    <div class="column">
-        <div class="num">0</div>
-        <div class="num">1</div>
-        <div class="num">2</div>
-    </div>
-    <div class="column">
-        <div class="num">0</div>
-        <div class="num">1</div>
-        <div class="num">2</div>
-        <div class="num">3</div>
-        <div class="num">4</div>
-        <div class="num">5</div>
-        <div class="num">6</div>
-        <div class="num">7</div>
-        <div class="num">8</div>
-        <div class="num">9</div>
-    </div>
-    <div class="colon"></div>
-    <div class="column">
-        <div class="num">0</div>
-        <div class="num">1</div>
-        <div class="num">2</div>
-        <div class="num">3</div>
-        <div class="num">4</div>
-        <div class="num">5</div>
-    </div>
-    <div class="column">
-        <div class="num">0</div>
-        <div class="num">1</div>
-        <div class="num">2</div>
-        <div class="num">3</div>
-        <div class="num">4</div>
-        <div class="num">5</div>
-        <div class="num">6</div>
-        <div class="num">7</div>
-        <div class="num">8</div>
-        <div class="num">9</div>
-    </div>
-    <div class="colon"></div>
-    <div class="column">
-        <div class="num">0</div>
-        <div class="num">1</div>
-        <div class="num">2</div>
-        <div class="num">3</div>
-        <div class="num">4</div>
-        <div class="num">5</div>
-    </div>
-    <div class="column">
-        <div class="num">0</div>
-        <div class="num">1</div>
-        <div class="num">2</div>
-        <div class="num">3</div>
-        <div class="num">4</div>
-        <div class="num">5</div>
-        <div class="num">6</div>
-        <div class="num">7</div>
-        <div class="num">8</div>
-        <div class="num">9</div>
+<body align="center">
+    <h1>2048</h1>
+    <p>分数:<span id="score"></span></p>
+
+    <audio  autoplay="autoplay" loop  id="music">
+        <source src="http://music.163.com/song/media/outer/url?id=5221167" audio="" >
+    </audio>
+    
+    <div id="gridPanel">
+        <!--背景单元格-->
+        <div id="g00" class="grid"></div>
+        <div id="g01" class="grid"></div>
+        <div id="g02" class="grid"></div>
+        <div id="g03" class="grid"></div>
+
+        <div id="g10" class="grid"></div>
+        <div id="g11" class="grid"></div>
+        <div id="g12" class="grid"></div>
+        <div id="g13" class="grid"></div>
+
+        <div id="g20" class="grid"></div>
+        <div id="g21" class="grid"></div>
+        <div id="g22" class="grid"></div>
+        <div id="g23" class="grid"></div>
+
+        <div id="g30" class="grid"></div>
+        <div id="g31" class="grid"></div>
+        <div id="g32" class="grid"></div>
+        <div id="g33" class="grid"></div>
+
+        <!--前景单元格-->
+
+        <div id="c00" class="cell"></div>
+        <div id="c01" class="cell"></div>
+        <div id="c02" class="cell"></div>
+        <div id="c03" class="cell"></div>
+
+        <div id="c10" class="cell"></div>
+        <div id="c11" class="cell"></div>
+        <div id="c12" class="cell"></div>
+        <div id="c13" class="cell"></div>
+
+        <div id="c20" class="cell"></div>
+        <div id="c21" class="cell"></div>
+        <div id="c22" class="cell"></div>
+        <div id="c23" class="cell"></div>
+
+        <div id="c30" class="cell"></div>
+        <div id="c31" class="cell"></div>
+        <div id="c32" class="cell"></div>
+        <div id="c33" class="cell"></div>
+
     </div>
 
-    <script src="./index.js"></script>
+    <!--Game Over界面-->
+
+    <div id="gameOver">
+
+        <div>
+            <!--灰色半透明背景-->
+        </div>
+
+        <!--前景小窗-->
+
+        <p>Game Over!<br>
+
+            分数:<span id="finalScore"></span><br>
+
+            <a class="button" id="restart" onclick="game.start()">Try again!</a>
+
+        </p>
+
+    </div>
 </body>
 
 </html>
