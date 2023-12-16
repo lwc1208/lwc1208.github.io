@@ -1,0 +1,89 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>吃什么</title>
+		<script language="javascript" type="text/javascript">
+			// 滚动速度 毫秒
+			var interval = 8;
+			// 吃的列表 想吃什么自己加
+			var eatWhat = ['油泼面', '鱼粉', '蛋炒饭', '睡觉', '麻辣烫', '火锅', '减肥']
+			
+			// 算一下有几个吃的
+			var num = eatWhat.length - 1;
+			
+			// 算是个开关吧 就这样 改了循环就挂了
+			var start = true;
+			
+			// 改变食物显示的方法
+			function pageStart(eatWhat, id){
+				var i = parseInt(Math.random()*7);
+				var cc = document.getElementById(id).innerHTML = eatWhat[i];
+			}			
+			
+			// 按钮点击事件
+			function clicka(id) {
+				if(start){
+					
+					myVar = window.setInterval(
+						function(){
+							pageStart(eatWhat,'food');
+						},
+						interval
+					);
+					var btn = document.getElementById('btn').innerHTML = '停止';
+					console.log('继续选');
+				} else {
+					
+					var i = parseInt(Math.random()*7);
+					var eatThis = eatWhat[i];
+					var cc = document.getElementById(id).innerHTML = eatThis;
+					var btn = document.getElementById('btn').innerHTML = '重选';
+					clearInterval(myVar);
+					console.log('选中 就吃它啦', eatThis);
+				}
+				start = !start;
+			}
+		</script>
+	</head>
+	<body>
+		<div class="box" align='center' >
+			<h2 id="food">今天吃什么</h2>
+			<button class="button" id="btn" onclick="clicka('food')">→点击此处←</button>
+		</div>
+	</body>
+	<style>
+		h2 {
+			font-size:3em;
+			margin: 1.5em;
+		}
+		.button {
+			background-color: pink;
+			border: none;
+			border-radius: 1em;
+			color: rgba(0,0,0,0.5);
+			width: 8em;
+			height: 3em;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 2.1em;
+			margin: auto;
+			cursor: pointer;
+		}
+		.box {
+			background-color: lightgrey;
+			border: 2px solid black;
+			border-radius: 2em;
+			width: 28em; 
+			height: 28em;
+			text-align: center;
+			line-height: 6.5em;
+			margin: auto;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+	</style>
+</html>
